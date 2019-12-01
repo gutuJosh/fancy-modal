@@ -1,0 +1,349 @@
+@import "colors";
+
+//Mask
+/*masks are used in combination with modals*/
+.fancy-modal-overlay-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-out;
+    &.dark {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    &.mask-on {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  
+  .fancy-modal{
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 1001;
+    &.fade-and-slide-down{
+     top:-50%;
+     left: 50%;
+     transition: top 0.3s ease-out;
+     transition-delay: 0s;
+     transform: translate(-50%, -50%);
+     &.show{
+        transition: top 0.3s ease-out;
+        transition-delay: 0.2s;
+        top: 50%;
+      }
+    }
+    &.fade-and-slide-left{
+      top:50%;
+      left: -600px;
+      transform: skew(10deg) translate(-50%, -50%);
+      transition: all 0.4s ease-out;
+      transition-delay: 0s;
+      &.show{
+        transform: skew(0deg) translate(-50%, -50%);
+        transition: all 0.4s ease-out;
+        transition-delay: 0.2s;
+        left: 50%;
+      }
+    }
+    &.fade-and-slide-right{
+      top:50%;
+      left: 2600px;
+      transform: skew(-10deg) translate(-50%, -50%);
+      transition: all 0.4s ease-out;
+      transition-delay: 0s;
+      &.show{
+        transform: skew(0deg) translate(-50%, -50%);
+        transition: all 0.4s ease-out;
+        transition-delay: 0.2s;
+        left: 50%;
+      }
+    }
+    &.fade-and-slide-up{
+      top: 150%;
+      left: 50%;
+      transition: top 0.3s ease-out;
+      transition-delay: 0s;
+      transform: translate(-50%, -50%);
+      &.show{
+         transition: top 0.3s ease-out;
+         transition-delay: 0.2s;
+         top: 50%;
+       }
+     }
+     &.fade-and-bounce-in, &.fade-and-zoom{
+      top: 50%;
+      left: 50%;
+      transition: all 0.3s ease-out;
+      transition-delay: 0s;
+      transform: scale(0.2) translate(-50%, -50%);
+      transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+      transform-origin: 0 0;
+      opacity:0;
+      &.show{
+         transition: all 0.3s ease-out;
+         transition-delay: 0.2s;
+         transform: scale(1) translate(-50%, -50%);
+         transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+         transform-origin: 0 0;
+         opacity: 1;
+       }
+     }
+     &.fade-and-zoom, &.image{
+      transition-timing-function: ease-out;
+      &.show{
+        transition-timing-function: ease-out;
+      }
+     }
+     &.flip-card, &.flip-card-drop-down{
+      top:10%;
+      left:50%;
+      transform: translateX(-50%);
+      background-color: transparent;
+      width: calc(100% - 20px);
+      perspective: 1000px;
+      -webkit-perspective: 1000px;
+      box-shadow: none;
+      .cards-wrapper{
+        position: relative;
+        width: 100%;
+        transition: transform 0.3s ease-out;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transform: rotateY(90deg);
+        .front-card, .back-card{
+          position: absolute;
+          width: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          
+        }
+        .back-card{
+          transform: rotateY(180deg);
+        }
+      }
+     &.show{
+      .cards-wrapper{
+        transform: rotateY(0deg)  rotateX(0deg);
+        transition: transform 0.6s ease-in-out;
+      }
+     }
+    }
+    &.flip-card-drop-down .cards-wrapper{
+        transform: rotateY(0deg) rotateX(-90deg);
+    }
+    &.image{
+      background-color:$snow;
+      .fancy-modal-body{
+        padding:5px 0;
+      }
+      img{
+        position: relative;
+        width:calc(100% - 10px);
+        height: auto;
+        border:10px solid $snow;
+        box-sizing: border-box;
+      }
+      .fancy-modal-close-btn{
+         position:absolute;
+         top:0px;
+         right:-16px;
+         width:32px;
+         height:32px;
+         background-color: #000;
+         background-size:50%;
+         border-radius:50%;
+         border:1px solid $snow;
+         @media (max-width: 600px) {
+          right:0;
+         }
+      }
+    }
+    &.info {
+      background-color: $azure;
+      color: $snow;
+      .front-card, .back-card{
+        background-color: $azure;
+      }
+    }
+    &.warning {
+      background-color: $yellow;
+      color: $snow;
+      .front-card, .back-card{
+        background-color: $yellow;
+      }
+    }
+    &.alert {
+      background-color: $red;
+      color: $snow;
+      .front-card, .back-card{
+        background-color: $red;
+      }
+    }
+    &.success {
+      background-color: $jade;
+      color: $snow;
+       .front-card, .back-card{
+         background-color: $jade;
+       }
+    }
+    &.dark{
+            background-color: $snow;
+            color: $asphalt-grey;
+            &.info {
+              background-color: $snow;
+              .fancy-modal-header {
+                background-color: $azure;
+                color: $snow;
+              }
+           
+              .fancy-modal-ok-btn {
+                background-color: $azure;
+                color:$snow;
+              }
+              .fancy-modal-ko-btn {
+                border: 1px solid $azure;
+                color: $azure;
+                background-color: transparent;
+              }
+              .text-info {
+                color: $snow;
+              }
+              .front-card{
+                background-color: $snow;
+              }
+              .back-card{
+                background-color: $azure;
+              }
+            }
+            &.warning {
+              background-color: $snow;
+              .fancy-modal-header {
+                background-color: $yellow;
+                color: $dark-grey;
+              }
+            
+              .fancy-modal-ok-btn {
+                background-color: $yellow;
+                color:$snow;
+              }
+              .text-warning {
+                color: $dark-grey;
+              }
+              .fancy-modal-ko-btn {
+                border: 1px solid $yellow;
+                color: $yellow;
+                background-color: transparent;
+              }
+              .front-card{
+                background-color: $snow;
+              }
+              .back-card{
+                background-color: $snow;
+              }
+            }
+            &.alert {
+              background-color: $snow;
+              .fancy-modal-header {
+                background-color: $red;
+                color: $snow;
+              }
+              .fancy-modal-ok-btn {
+                background-color: $red;
+                color:$snow;
+              }
+              .fancy-modal-ko-btn {
+                border: 1px solid $red;
+                color: $red;
+                background-color: transparent;
+              }
+              .text-alert {
+                color: $snow;
+              }
+              .front-card{
+                background-color: $snow;
+              }
+              .back-card{
+                background-color: $snow;
+              }
+            }
+            &.success {
+              background-color: $snow;
+              .fancy-modal-header {
+                background-color: $jade;
+                color: $snow;
+              }
+              .fancy-modal-ok-btn {
+                background-color: $jade;
+                color:$snow;
+              }
+              .fancy-modal-ko-btn {
+                border: 1px solid $jade;
+                color: $jade;
+                background-color: transparent;
+              }
+              .text-success {
+                color: $snow;
+              }
+              .front-card{
+                background-color: $snow;
+              }
+              .back-card{
+                background-color: $snow;
+              }
+          }
+    }
+    &.light{
+      box-shadow: 0 0 25px 0 rgba(125, 91, 64, 0.25);
+      .fancy-modal-footer button:hover{
+        background-color: $snow;
+      }
+    }
+  }
+  
+  .fancy-modal-header {
+    min-height: 40px;
+    line-height: 20px;
+    position: relative;
+  }
+  .fancy-modal-close-btn{
+      display: block;
+      width:16px;
+      height:16px;
+      background:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfjCxEOIB6mZPasAAAA5ElEQVRIx6WVSw7CMAxER9wLFoUjgLqAZY6eGyDYFGlYtKiJ49im9bLJe/ko4wJLcWDmiEBxZOYgP574JPnhw8VvnEi+eWlx+ooFZ6UocEdR4KtC4IZC4D8FM9ua2uvk2OAkmcGrOiB2oaw+z7oDAYWJw1W4uHHCiYmpMyJvqbMLverV/1boeFjRx0MKG3cVPg4ATF1BamcfAsb/qvNsqqe1FfcVLm4rQnhfEcZ1xc4w2YF1+4Wfd1MRaheWYn9TPSptXY2MsosXz4BUGIkTihlHrXACWyhWvFAE8r4oahzY/nv/AlUXe3P23ZVJAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE5LTExLTE3VDE0OjMyOjMwKzAwOjAwUuavGAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0xMS0xN1QxNDozMjozMCswMDowMCO7F6QAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC') center center no-repeat transparent;
+      background-size:cover;
+      cursor:pointer;
+      position:absolute;
+      top:50%;
+      right:10px;
+      transform:translateY(-50%);
+      border:none;
+  }
+  .fancy-modal-body{
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+  }
+  .fancy-modal-footer {
+    padding: 0 10px 30px 10px;
+    text-align: center;
+    button {
+      margin: 0 5px;
+      border:none;
+      user-select:none;
+      min-width:80px;
+      text-align:center;
+      vertical-align:middle;
+      cursor:pointer;
+      padding: 6px 12px;
+      font-size:14px;
+      line-height: 40px;
+      background-color:$snow;
+    }
+  }
